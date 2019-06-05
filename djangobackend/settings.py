@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'djangobackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'djangobackend',
+        'NAME': 'shappit_backend',
     }
 }
 
