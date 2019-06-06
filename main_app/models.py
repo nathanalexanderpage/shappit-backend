@@ -46,11 +46,12 @@ class ServiceCenter(models.Model):
 
 class PaymentTransaction(models.Model):
     made_by = models.CharField(max_length=60)
+    input_by = models.ForeignKey(User, on_delete=models.CASCADE)
     method = models.ForeignKey(PaymentMethod, on_delete=models.CASCADE)
-    note = models.CharField(max_length=255)
     date_time = models.IntegerField()
     origin = models.ForeignKey(ServiceCenter, on_delete=models.CASCADE)
     card_last_four = models.IntegerField()
+    note = models.CharField(max_length=255)
 
 class Shipment(models.Model):
     no = models.IntegerField()
