@@ -8,7 +8,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-# # Create your views here.
+# Create your views here.
+
 # @api_view(['GET', 'POST'])
 # def dogs_index(request):
 #     if request.method == 'GET':
@@ -21,6 +22,16 @@ from rest_framework.response import Response
 #             serializer.save()
 #             return Response(serializer.data)
 #         return Response(serializer.errors)
+
+@api_view(['GET'])
+def barges(request):
+    if request.method == 'GET':
+        barges = Barge.objects.all()
+        serializer = BargeSerializer(barges, many=True)
+        return Response(serializer.data)
+    else:
+        return Response(serializer.errors)
+
 #
 # @api_view(['GET', 'POST'])
 # def dog_toys_index(request):
