@@ -1,16 +1,6 @@
 from rest_framework import serializers
 from .models import Barge, Customer, CustomerContact, CustomerStanding, Equipment, EquipmentTypeDetails, PaymentMethod, PaymentTransaction, ServiceCenter, Shipment, Stop, Tug, Voyage
 
-# class DogToySerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = DogToy
-#         fields = ('id', 'name', 'color')
-#
-# class DogSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Dog
-#         fields = ('id', 'name', 'desc', 'age', 'user', 'dog_toys')
-
 class BargeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Barge
@@ -50,3 +40,28 @@ class PaymentTransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = PaymentTransaction
         fields = ('id', 'made_by', 'input_by', 'date_time', 'method', 'note')
+
+class ServiceCenterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EquipmentTypeDetails
+        fields = ('id', 'name', 'code', 'lat', 'lng')
+
+class ShipmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Shipment
+        fields = ('id', 'no', 'origin', 'destination', 'shipper', 'consignee', 'billto', 'equipment')
+
+class TugSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tug
+        fields = ('id', 'name', 'status', 'last_lng', 'last_lat')
+
+class VoyageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Voyage
+        fields = ('id', 'no', 'tug', 'barge', 'current_sequence', 'finished')
+
+class StopSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stop
+        fields = ('id', 'voyage', 'sequence', 'service_center', 'arrival_expected', 'arrival_actual', 'departure_expected', 'departure_actual')

@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-# from .models import Dog
+from .models import Barge, Customer, CustomerContact, CustomerStanding, Equipment, EquipmentTypeDetails, PaymentMethod, PaymentTransaction, ServiceCenter, Shipment, Stop, Tug, Voyage
 from rest_framework import serializers
-# from .serializers import DogSerializer
+from .serializers import BargeSerializer, CustomerSerializer, CustomerContactSerializer, CustomerStandingSerializer, EquipmentSerializer, EquipmentTypeDetailsSerializer, PaymentMethodSerializer, PaymentTransactionSerializer, ServiceCenterSerializer, ShipmentSerializer, TugSerializer, StopSerializer
 
 from rest_framework import status
 from rest_framework.decorators import api_view
