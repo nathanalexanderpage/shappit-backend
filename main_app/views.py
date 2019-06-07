@@ -100,7 +100,7 @@ def addresses_for_customer(request, customer_id):
         print(addresses_data)
         return Response(addresses_data)
     else:
-        return Response('error: not GET method')
+        return Response('error: not a GET method')
 
 # @api_view(['GET', 'PUT', 'DELETE'])
 # def dog_detail(request, pk):

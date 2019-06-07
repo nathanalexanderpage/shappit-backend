@@ -26,7 +26,7 @@ SECRET_KEY = '^22x5t#+d9qs^_8fr$_wxtq=d@+tin)8fj_2)&_eo(5@$ztbx('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['shappit-backend.herokuapp.com']
 
 
 # Application definition
