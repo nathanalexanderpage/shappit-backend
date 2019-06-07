@@ -38,6 +38,13 @@ def barge(request):
         barges = Barge.objects.all()
         serializer = BargeSerializer(barges, many=True)
         return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = BargeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
     else:
         return Response(serializer.errors)
 
