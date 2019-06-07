@@ -11,7 +11,7 @@ class CustomerStanding(models.Model):
 
 class Customer(models.Model):
     name = models.CharField(max_length=60)
-    credit_limit = models.IntegerField(default=0)
+    credit_limit = models.IntegerField(blank=True, default=2000)
     standing = models.ForeignKey(CustomerStanding, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -19,9 +19,9 @@ class Customer(models.Model):
 
 class CustomerContact(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    phone = models.IntegerField()
+    phone = models.CharField(max_length=10)
     address_line_1 = models.CharField(max_length=100)
-    address_line_2 = models.CharField(max_length=50, blank=True, default='')
+    address_line_2 = models.CharField(max_length=50, blank=True, null=True, default='')
     address_city = models.CharField(max_length=50)
     address_state = models.CharField(max_length=50)
     address_zip = models.IntegerField()

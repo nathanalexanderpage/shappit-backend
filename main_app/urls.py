@@ -6,6 +6,10 @@ urlpatterns = [
     path('barges/', views.barge, name='barges_index'),
     # all voyages associated with certain barge
     path('barges/<int:barge_id>/voyages/', views.voyages_using_barge, name='voyages_using_barge'),
+    # all customers
+    path('customers/', views.customers_index, name='customers_index'),
+    # all customer standings
+    path('customerstandings/', views.customer_standings, name='customer_standings'),
     # all shipments associated with a shipper
     path('customer/<int:customer_id>/<str:role>/shipments', views.shipments_with_customer_as, name='shipments_with_customer_as'),
     # all shipments to/from service center
@@ -13,7 +17,7 @@ urlpatterns = [
 
     # all shipments that used specified container
     # path('container/<int:equipment_id>/shipments/', views.shipments_using_equipment, name='shipments_using_equipment'),
-    
+
     # all shipments associated with a consignee
     # path('customer/<int:pk>/consignee/shipments'),
     # all shipments associated with a bill-to
