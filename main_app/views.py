@@ -109,6 +109,18 @@ def addresses_for_customer(request, customer_id):
     else:
         return Response('error: not a GET method')
 
+# equipments of type
+@api_view(['GET'])
+def equipment_of_type(request, customer_id):
+    if request.method == 'GET':
+        addresses_queryset = CustomerContact.objects.filter(customer_id=customer_id)
+        json_ready = list(addresses_queryset)
+        addresses_data = serializers.serialize('json', json_ready)
+        print(addresses_data)
+        return Response(addresses_data)
+    else:
+        return Response('error: not a GET method')
+
 # @api_view(['GET', 'PUT', 'DELETE'])
 # def dog_detail(request, pk):
 #     if request.method == 'GET':
