@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Barge, Customer, CustomerContact, CustomerStanding, Equipment, EquipmentTypeDetails, PaymentMethod, PaymentTransaction, ServiceCenter, Shipment, Stop, Tug, Voyage
+from .models import Barge, Customer, CustomerContact, CustomerStanding, Equipment, EquipmentType, PaymentMethod, PaymentTransaction, ServiceCenter, Shipment, Stop, Tug, Voyage
 
 class BargeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,11 +24,11 @@ class CustomerStandingSerializer(serializers.ModelSerializer):
 class EquipmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Equipment
-        fields = ('id', 'no', 'status', 'type')
+        fields = ('no', 'status', 'type')
 
-class EquipmentTypeDetailsSerializer(serializers.ModelSerializer):
+class EquipmentTypeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = EquipmentTypeDetails
+        model = EquipmentType
         fields = ('id', 'name')
 
 class PaymentMethodSerializer(serializers.ModelSerializer):
@@ -43,7 +43,7 @@ class PaymentTransactionSerializer(serializers.ModelSerializer):
 
 class ServiceCenterSerializer(serializers.ModelSerializer):
     class Meta:
-        model = EquipmentTypeDetails
+        model = ServiceCenter
         fields = ('id', 'name', 'code', 'lat', 'lng')
 
 class ShipmentSerializer(serializers.ModelSerializer):
