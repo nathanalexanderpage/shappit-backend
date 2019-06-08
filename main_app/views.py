@@ -114,25 +114,6 @@ def equipment_of_type(request, customer_id):
     else:
         return Response('error: not a GET method')
 
-
-
-# @api_view(['GET', 'PUT', 'DELETE'])
-# def dog_detail(request, pk):
-#     if request.method == 'GET':
-#         dog = Dog.objects.get(pk=pk)
-#         serializer = DogSerializer(dog)
-#         return Response(serializer.data, status=status.HTTP_200_OK)
-#     elif request.method == 'PUT':
-#         serializer = DogSerializer(dog, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#     elif request.method == 'DELETE':
-#         dog = Dog.objects.get(pk=pk)
-#         dog.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
-
 # EQUIPMENT TYPES
 @api_view(['GET', 'POST'])
 def equipment_types(request):
@@ -165,9 +146,25 @@ def payment_methods(request):
     else:
         return Response(serializer.errors)
 
+# PAYMENT METHODS
+@api_view(['GET', 'POST'])
+def service_centers(request):
+    if request.method == 'GET':
+        service_centers = ServiceCenter.objects.all()
+        serializer = ServiceCenterSerializer(service_centers, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = ServiceCenterSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+    else:
+        return Response(serializer.errors)
+
 # SHIPMENTS
 @api_view(['POST'])
-def shipment(request):
+def shipment_init(request):
     if request.method == 'POST':
         serializer = ShipmentSerializer(data=request.data)
         if serializer.is_valid():
@@ -178,9 +175,39 @@ def shipment(request):
     else:
         return Response(serializer.errors)
 
+# @api_view(['GET', 'PUT', 'DELETE'])
+# def dog_detail(request, pk):
+#     if request.method == 'GET':
+#         dog = Dog.objects.get(pk=pk)
+#         serializer = DogSerializer(dog)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
+#     elif request.method == 'PUT':
+#         serializer = DogSerializer(dog, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     elif request.method == 'DELETE':
+#         dog = Dog.objects.get(pk=pk)
+#         dog.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET', 'DELETE'])
+def shipment_postop(request, pk):
+    if request.method == 'GET':
+        shipment = Barge.objects.get(pk=pk)
+        serializer = ShipmentSerializer(barges, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'DELETE':
+        shipment = Barge.objects.get(pk=pk)
+        shipment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    else:
+        return Response(serializer.errors)
+
 # all shipments that used specified container
 @api_view(['GET'])
-def shipments_using_container(request, equipment_id):
+def shipments_using_equipment(request, equipment_id):
     if request.method == 'GET':
         shipments_queryset = Shipment.objects.filter(equipment=equipment_id)
         json_ready = list(shipments_queryset)
@@ -241,6 +268,18 @@ def tugs(request):
 def voyages_using_barge(request, barge_id):
     if request.method == 'GET':
         voyages_queryset = Voyage.objects.filter(barge=barge_id)
+        json_ready = list(voyages_queryset)
+        voyages_data = serializers.serialize('json', json_ready)
+        print(voyages_data)
+        return Response(voyages_data)
+    else:
+        return Response('error: not GET method')
+
+# all voyages associated with certain tug
+@api_view(['GET'])
+def voyages_using_tug(request, tug_id):
+    if request.method == 'GET':
+        voyages_queryset = Voyage.objects.filter(tug=tug_id)
         json_ready = list(voyages_queryset)
         voyages_data = serializers.serialize('json', json_ready)
         print(voyages_data)
