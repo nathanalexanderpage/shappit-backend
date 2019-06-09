@@ -49,8 +49,11 @@ class Shipment(models.Model):
     origin = models.ForeignKey(ServiceCenter, on_delete=models.CASCADE, related_name='shipments_originating')
     destination = models.ForeignKey(ServiceCenter, on_delete=models.CASCADE, related_name='shipments_delivering')
     shipper = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='shipments_shipped_by')
+    shipper_contact = models.ForeignKey(CustomerContact, on_delete=models.CASCADE, related_name='shipment_shipper_contact')
     consignee = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='shipments_consigned_to')
+    consignee_contact = models.ForeignKey(CustomerContact, on_delete=models.CASCADE, related_name='shipment_consignee_contact')
     billto = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='shipments_billed_to')
+    billto_contact = models.ForeignKey(CustomerContact, on_delete=models.CASCADE, related_name='shipment_billto_contact')
     equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
 
 class PaymentTransaction(models.Model):

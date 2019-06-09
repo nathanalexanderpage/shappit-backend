@@ -17,6 +17,26 @@ test_resp = [
 ]
 
 # Create your views here.
+# ALL NEW SHIPMENT INFO
+@api_view(['GET'])
+def new_shipment_info(request):
+    if request.method == 'GET':
+        result_customers = Customer.objects.all()
+        serializer = CustomerSerializer(result_customers, many=True)
+        eqt = Equipment.objects.all()
+        serializer = EquipmentSerializer(eqt, many=True)
+        service_centers = ServiceCenter.objects.all()
+        serializer = ServiceCenterSerializer(service_centers, many=True)
+    elif request.method == 'POST':
+        serializer = BargeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
+    else:
+        return Response(serializer.errors)
+
 # BARGES
 @api_view(['GET', 'POST'])
 def barge(request):
@@ -263,6 +283,21 @@ def tugs(request):
         return Response(serializer.errors)
 
 # VOYAGES
+@api_view(['GET', 'POST'])
+def voyages(request):
+    if request.method == 'GET':
+        voyages = Voyage.objects.all()
+        serializer = BargeSerializer(voyages, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = VoyageSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
+    else:
+        return Response(serializer.errors)
 # all voyages associated with certain barge
 @api_view(['GET'])
 def voyages_using_barge(request, barge_id):
