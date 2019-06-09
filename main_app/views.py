@@ -298,6 +298,7 @@ def voyages(request):
             return Response(serializer.errors)
     else:
         return Response(serializer.errors)
+        
 # all voyages associated with certain barge
 @api_view(['GET'])
 def voyages_using_barge(request, barge_id):
