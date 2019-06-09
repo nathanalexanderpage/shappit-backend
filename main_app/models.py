@@ -45,7 +45,6 @@ class ServiceCenter(models.Model):
     lng = models.CharField(max_length=11)
 
 class Shipment(models.Model):
-    no = models.IntegerField()
     origin = models.ForeignKey(ServiceCenter, on_delete=models.CASCADE, related_name='shipments_originating')
     destination = models.ForeignKey(ServiceCenter, on_delete=models.CASCADE, related_name='shipments_delivering')
     shipper = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='shipments_shipped_by')
@@ -54,7 +53,8 @@ class Shipment(models.Model):
     # consignee_contact = models.ForeignKey(CustomerContact, on_delete=models.CASCADE, related_name='shipment_consignee_contact')
     billto = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='shipments_billed_to')
     # billto_contact = models.ForeignKey(CustomerContact, on_delete=models.CASCADE, related_name='shipment_billto_contact')
-    equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
+    equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE),
+    desc = models.CharField(max_length=255)
 
 class PaymentTransaction(models.Model):
     made_by = models.CharField(max_length=60)
