@@ -21,12 +21,22 @@ test_resp = [
 @api_view(['GET'])
 def new_shipment_info(request):
     if request.method == 'GET':
+        # customers list
         result_customers = Customer.objects.all()
-        serializer = CustomerSerializer(result_customers, many=True)
+        cust_serializer = sorted(CustomerSerializer(result_customers, many=True).data, key=lambda item: item['name'])
+        # equipment list
         eqt = Equipment.objects.all()
-        serializer = EquipmentSerializer(eqt, many=True)
+        eqt_serializer = sorted(EquipmentSerializer(eqt, many=True).data, key=lambda item: item['no'])
+        # service center list
         service_centers = ServiceCenter.objects.all()
-        serializer = ServiceCenterSerializer(service_centers, many=True)
+        serv_cent_serializer = sorted(ServiceCenterSerializer(service_centers, many=True).data, key=lambda item: item['code'])
+        return Response(
+            {
+                'cust_serializer': cust_serializer,
+                'eqt_serializer': eqt_serializer,
+                'serv_cent_serializer': serv_cent_serializer,
+            }
+        )
     elif request.method == 'POST':
         serializer = BargeSerializer(data=request.data)
         if serializer.is_valid():
@@ -298,7 +308,7 @@ def voyages(request):
             return Response(serializer.errors)
     else:
         return Response(serializer.errors)
-        
+
 # all voyages associated with certain barge
 @api_view(['GET'])
 def voyages_using_barge(request, barge_id):
