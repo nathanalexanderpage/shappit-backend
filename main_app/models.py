@@ -53,7 +53,7 @@ class Shipment(models.Model):
     # consignee_contact = models.ForeignKey(CustomerContact, on_delete=models.CASCADE, related_name='shipment_consignee_contact')
     billto = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='shipments_billed_to')
     # billto_contact = models.ForeignKey(CustomerContact, on_delete=models.CASCADE, related_name='shipment_billto_contact')
-    equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE),
+    equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
     desc = models.CharField(max_length=255)
 
 class PaymentTransaction(models.Model):

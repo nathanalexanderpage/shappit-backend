@@ -195,7 +195,9 @@ def service_centers(request):
 # SHIPMENTS
 @api_view(['POST'])
 def shipment_init(request):
+    print(request.method)
     if request.method == 'POST':
+        print(request.data)
         serializer = ShipmentSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -225,8 +227,8 @@ def shipment_init(request):
 @api_view(['GET', 'DELETE'])
 def shipment_postop(request, pk):
     if request.method == 'GET':
-        shipment = Barge.objects.get(pk=pk)
-        serializer = ShipmentSerializer(barges, many=True)
+        shipment = Shipment.objects.get(pk=pk)
+        serializer = ShipmentSerializer(shipment)
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'DELETE':
         shipment = Barge.objects.get(pk=pk)

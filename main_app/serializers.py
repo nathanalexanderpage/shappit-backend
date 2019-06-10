@@ -49,7 +49,7 @@ class ServiceCenterSerializer(serializers.ModelSerializer):
 class ShipmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shipment
-        fields = ('id', 'no', 'origin', 'destination', 'shipper', 'consignee', 'billto', 'equipment')
+        fields = ('id', 'origin', 'destination', 'shipper', 'consignee', 'billto', 'desc', 'equipment')
 
 class TugSerializer(serializers.ModelSerializer):
     class Meta:

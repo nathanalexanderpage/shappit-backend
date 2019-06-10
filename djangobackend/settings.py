@@ -29,7 +29,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'shappit-backend.herokuapp.com',
     # disallow in production
-    'localhost'
+    'localhost',
+    'http://localhost:8000'
 ]
 
 
