@@ -267,11 +267,32 @@ def shipments_to_or_from_service_center(request, service_center, origin_or_desti
 def shipments_with_customer_as(request, customer_id, role):
     if request.method == 'GET':
         if role == 'shipper':
+            print('inside SHIPPER')
             shipments_queryset = Shipment.objects.filter(shipper=customer_id)
+            print('queryset RETRIEVED')
+            json_ready = list(shipments_queryset)
+            print('json_ready READY')
+            shipments_data = serializers.serialize('json', json_ready)
+            print('READY TO RETURN RESPONSE')
+            return Response(shipments_data)
         elif role == 'consignee':
+            print('inside CONSIGNEE')
             shipments_queryset = Shipment.objects.filter(consignee=customer_id)
+            print('queryset RETRIEVED')
+            json_ready = list(shipments_queryset)
+            print('json_ready READY')
+            shipments_data = serializers.serialize('json', json_ready)
+            print('READY TO RETURN RESPONSE')
+            return Response(shipments_data)
         elif role == 'billto':
+            print('inside BILLTO')
             shipments_queryset = Shipment.objects.filter(billto=customer_id)
+            print('queryset RETRIEVED')
+            json_ready = list(shipments_queryset)
+            print('json_ready READY')
+            shipments_data = serializers.serialize('json', json_ready)
+            print('READY TO RETURN RESPONSE')
+            return Response(shipments_data)
         else:
             return Response('error: customer role not shipper, consignee, or bill-to')
     else:
