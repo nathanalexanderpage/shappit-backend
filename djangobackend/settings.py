@@ -24,13 +24,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^22x5t#+d9qs^_8fr$_wxtq=d@+tin)8fj_2)&_eo(5@$ztbx('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = [
     'shappit-backend.herokuapp.com',
     # disallow in production
-    'localhost',
-    'http://localhost:8000'
+    # 'localhost',
+    # 'http://localhost:8000'
 ]
 
 
@@ -82,18 +82,18 @@ WSGI_APPLICATION = 'djangobackend.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 # DEV SETTING:
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'shappit_backend',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'shappit_backend',
+#     }
+# }
 
 # PRODUCTION DATABASE SETTINGS:
-# DATABASES = {}
-# DATABASES['default'] = dj_database_url.config(
-#     default = 'postgres://gjplhbsooptlge:19e7f3449689ccd7504ec642e996c5b136529fec9ab0004b2341156f6b22946a@ec2-50-19-221-38.compute-1.amazonaws.com:5432/d6alr3d5mjfge7'
-# )
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(
+    default = 'postgres://gjplhbsooptlge:19e7f3449689ccd7504ec642e996c5b136529fec9ab0004b2341156f6b22946a@ec2-50-19-221-38.compute-1.amazonaws.com:5432/d6alr3d5mjfge7'
+)
 
 
 # Password validation
